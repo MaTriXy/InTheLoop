@@ -1,7 +1,5 @@
-package com.theapphideaway.intheloop.fragments
+package com.theapphideaway.intheloop.Fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
@@ -18,18 +16,18 @@ private const val ARG_PARAM2 = "param2"
 /**
  * A simple [Fragment] subclass.
  * Activities that contain this fragment must implement the
- * [TechPage.OnFragmentInteractionListener] interface
+ * [SportsPage.OnFragmentInteractionListener] interface
  * to handle interaction events.
- * Use the [TechPage.newInstance] factory method to
+ * Use the [SportsPage.newInstance] factory method to
  * create an instance of this fragment.
  *
  */
-class TechPage : Fragment() {
+class SportsPage : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tech_page, container, false)
+        return inflater.inflate(R.layout.fragment_sports_page, container, false)
     }
 }

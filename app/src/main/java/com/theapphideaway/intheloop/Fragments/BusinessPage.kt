@@ -1,7 +1,5 @@
-package com.theapphideaway.intheloop.fragments
+package com.theapphideaway.intheloop.Fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater

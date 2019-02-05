@@ -1,13 +1,16 @@
-package com.theapphideaway.intheloop.fragments
+package com.theapphideaway.intheloop.Fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.theapphideaway.intheloop.R
+import com.theapphideaway.intheloop.Services.HeadlineService
+import kotlinx.android.synthetic.main.fragment_featured_page.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -26,14 +29,24 @@ private const val ARG_PARAM2 = "param2"
  */
 class FeaturedPage : Fragment() {
 
-
+    val headlineService = HeadlineService()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_featured_page, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_featured_page, container, false)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            var headline = headlineService.getHeadlineApi().getHeadlines(
+                "us",
+                ""
+            ).await()
+            rootView.text_view_test.text = headline.articles[0].title
+        }
+
+
+        return rootView
     }
 
 }
