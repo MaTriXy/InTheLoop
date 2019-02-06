@@ -47,13 +47,11 @@ class MainActivity : AppCompatActivity() {
         override fun getItem(position: Int): Fragment {
             return when (position) {
                 0 -> FeaturedPage()
-                1 -> UsPage()
-                2 -> WorldPage()
-                3 -> BusinessPage()
-                4 -> TechPage()
-                5 -> EntertainmentPage()
-                6 -> SportsPage()
-                7 -> SciencePage()
+                1 -> BusinessPage()
+                2 -> TechPage()
+                3 -> EntertainmentPage()
+                4-> SportsPage()
+                5 -> SciencePage()
 
 
 
@@ -65,19 +63,17 @@ class MainActivity : AppCompatActivity() {
 
         override fun getCount(): Int {
             // Show 2 total pages.
-            return 9
+            return 7
         }
 
         override fun getPageTitle(position: Int): CharSequence {
             return when (position) {
                 0 -> "Featured"
-                1 -> "US"
-                2 -> "World"
-                3 -> "Business"
-                4 -> "Tech"
-                5 -> "Entertainment"
-                6 -> "Sports"
-                7 -> "Science"
+                1 -> "Business"
+                2 -> "Tech"
+                3 -> "Entertainment"
+                4 -> "Sports"
+                5 -> "Science"
 
                 else -> {
                     return "Health"

@@ -2,10 +2,20 @@ package com.theapphideaway.intheloop.Fragments
 
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.theapphideaway.intheloop.Adapters.BusinessAdapter
+import com.theapphideaway.intheloop.Adapters.HeadlineAdapter
+import com.theapphideaway.intheloop.Adapters.HealthAdapter
 import com.theapphideaway.intheloop.R
+import com.theapphideaway.intheloop.Services.HeadlineService
+import kotlinx.android.synthetic.main.fragment_health_page.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -23,11 +33,30 @@ private const val ARG_PARAM2 = "param2"
  *
  */
 class HealthPage : Fragment() {
+    val headlineService = HeadlineService()
+    private var healthAdapter: HealthAdapter? = null
+    private var layoutManager: RecyclerView.LayoutManager? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_health_page, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_health_page, container, false)
+
+        GlobalScope.launch(Dispatchers.Main) {
+            var headline = headlineService.getHeadlineApi().getSpecificHeadlines(
+                "us",
+                "health",
+                100,
+                "5b4577ccf70249d3822d400479cd2f44"
+            ).await()
+
+            layoutManager = LinearLayoutManager(rootView.context)
+            healthAdapter = HealthAdapter(headline, rootView.context)
+
+            rootView.health_recycler_view.adapter = healthAdapter
+            rootView.health_recycler_view.layoutManager = layoutManager
+        }
+        return rootView
     }
 }

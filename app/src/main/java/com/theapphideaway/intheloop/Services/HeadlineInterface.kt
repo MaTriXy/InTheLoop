@@ -8,8 +8,12 @@ import retrofit2.http.Query
 interface HeadlineInterface {
 
     @GET("top-headlines")
-    fun getHeadlines(
+    fun getSpecificHeadlines(
         @Query("country") country: String,
+        @Query("category") category: String,
+        @Query("pageSize") pageSize: Int,
         @Query("apiKey") apiKey: String
     ): Deferred<HeadlineResponse>
+
+
 }
