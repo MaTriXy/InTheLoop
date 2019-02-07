@@ -15,5 +15,12 @@ interface HeadlineInterface {
         @Query("apiKey") apiKey: String
     ): Deferred<HeadlineResponse>
 
+    @GET("everything")
+    fun getSearchedHeadlines(
+        @Query("q") query: String,
+        @Query("pageSize") pageSize: Int,
+        @Query("apiKey") apiKey: String
+    ): Deferred<HeadlineResponse>
+
 
 }

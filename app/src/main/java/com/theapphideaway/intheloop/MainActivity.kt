@@ -2,83 +2,68 @@ package com.theapphideaway.intheloop
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.design.widget.TabLayout
 import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import com.theapphideaway.intheloop.Fragments.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
 
-    private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
+
+class MainActivity : FragmentActivity() {
+
+    private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+        when (item.itemId) {
+            R.id.navigation_home -> {
+                switchToHeadlines()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_dashboard -> {
+                switchToExplore()
+                return@OnNavigationItemSelectedListener true
+            }
+            R.id.navigation_notifications -> {
+                switchToSettings()
+                return@OnNavigationItemSelectedListener true
+            }
+        }
+        false
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val tabLayout: TabLayout = findViewById(R.id.tab_layout)
 
-        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
 
-            }
-
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
-        })
-
-        tab_layout.setupWithViewPager(view_pager)
-
-        // Create the adapter that will return a fragment for each of the three
-        // primary sections of the activity.
-        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
-
-        // Set up the ViewPager with the sections adapter.
-        view_pager.adapter = mSectionsPagerAdapter
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }
 
-    class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+    fun switchToHeadlines() {
+        val manager = supportFragmentManager
+        manager.findFragmentById(R.id.fragment)
+        manager.beginTransaction()
+            .attach(MainFragment())
+            .replace(R.id.fragment, MainFragment()).commit()
 
-        override fun getItem(position: Int): Fragment {
-            return when (position) {
-                0 -> FeaturedPage()
-                1 -> BusinessPage()
-                2 -> TechPage()
-                3 -> EntertainmentPage()
-                4-> SportsPage()
-                5 -> SciencePage()
-
-
-
-                else -> {
-                    return HealthPage()
-                }
-            }
-        }
-
-        override fun getCount(): Int {
-            // Show 2 total pages.
-            return 7
-        }
-
-        override fun getPageTitle(position: Int): CharSequence {
-            return when (position) {
-                0 -> "Featured"
-                1 -> "Business"
-                2 -> "Tech"
-                3 -> "Entertainment"
-                4 -> "Sports"
-                5 -> "Science"
-
-                else -> {
-                    return "Health"
-                }
-            }
-        }
+    }
+    fun switchToExplore() {
+        val manager = supportFragmentManager
+        manager.findFragmentById(R.id.fragment)
+        manager.beginTransaction()
+            .attach(ExploreFragment())
+            .replace(R.id.fragment, ExploreFragment()).commit()
+    }
+    fun switchToSettings() {
+        val manager = supportFragmentManager
+        manager.findFragmentById(R.id.fragment)
+        manager.beginTransaction()
+            .attach(SettingsFragment())
+            .replace(R.id.fragment, SettingsFragment()).commit()
     }
 }

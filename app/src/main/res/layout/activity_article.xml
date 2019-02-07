@@ -13,6 +13,7 @@
   android:layout_height="wrap_content"
   android:background="?attr/colorPrimary"
   android:minHeight="?attr/actionBarSize"
+  android:fontFamily="@font/san_francisco"
   app:theme="@style/ThemeOverlay.AppCompat.Dark" />
     <WebView
             android:id="@+id/web_view"

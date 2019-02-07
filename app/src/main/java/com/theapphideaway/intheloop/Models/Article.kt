@@ -1,5 +1,7 @@
 package com.theapphideaway.intheloop.Models
 
+import java.io.Serializable
+
 data class Article(
     var author: String,
     var content: Any,
@@ -9,4 +11,4 @@ data class Article(
     var title: String,
     var url: String,
     var urlToImage: String
-)
+): Serializable
