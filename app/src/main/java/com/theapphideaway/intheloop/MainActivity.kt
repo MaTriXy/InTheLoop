@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentActivity
 import android.support.v4.app.FragmentManager
 import android.support.v4.app.FragmentPagerAdapter
+import android.support.v7.app.AppCompatDelegate
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -28,16 +29,16 @@ class MainActivity : FragmentActivity() {
                 switchToExplore()
                 return@OnNavigationItemSelectedListener true
             }
-            R.id.navigation_notifications -> {
-                switchToSettings()
-                return@OnNavigationItemSelectedListener true
-            }
         }
         false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        AppCompatDelegate.setDefaultNightMode(
+            AppCompatDelegate.MODE_NIGHT_YES)
+
         setContentView(R.layout.activity_main)
 
 
@@ -58,12 +59,5 @@ class MainActivity : FragmentActivity() {
         manager.beginTransaction()
             .attach(ExploreFragment())
             .replace(R.id.fragment, ExploreFragment()).commit()
-    }
-    fun switchToSettings() {
-        val manager = supportFragmentManager
-        manager.findFragmentById(R.id.fragment)
-        manager.beginTransaction()
-            .attach(SettingsFragment())
-            .replace(R.id.fragment, SettingsFragment()).commit()
     }
 }

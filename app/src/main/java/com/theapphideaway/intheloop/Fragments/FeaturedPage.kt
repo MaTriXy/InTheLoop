@@ -8,16 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.theapphideaway.intheloop.Adapters.FeaturedAdapter
-import com.theapphideaway.intheloop.Adapters.HeadlineAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
 import kotlinx.android.synthetic.main.fragment_featured_page.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import android.widget.Toast
-
-
 
 
 // TODO: Rename parameter arguments, choose names that match

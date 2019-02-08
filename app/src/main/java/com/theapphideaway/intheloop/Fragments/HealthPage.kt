@@ -7,8 +7,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.BusinessAdapter
-import com.theapphideaway.intheloop.Adapters.HeadlineAdapter
 import com.theapphideaway.intheloop.Adapters.HealthAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService

@@ -7,12 +7,9 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.EntertainmentAdapter
-import com.theapphideaway.intheloop.Adapters.HeadlineAdapter
 import com.theapphideaway.intheloop.Adapters.ScienceAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
-import kotlinx.android.synthetic.main.fragment_entertainment_page.view.*
 import kotlinx.android.synthetic.main.fragment_science_page.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope

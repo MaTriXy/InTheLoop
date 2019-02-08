@@ -16,6 +16,7 @@ import com.theapphideaway.intheloop.Models.Article
 import com.theapphideaway.intheloop.Models.HeadlineResponse
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
+import java.text.SimpleDateFormat
 
 class FeaturedAdapter (private val headlineResponse: HeadlineResponse, private val context: Context):
     RecyclerView.Adapter<FeaturedAdapter.ViewHolder>() {
@@ -55,9 +56,20 @@ class FeaturedAdapter (private val headlineResponse: HeadlineResponse, private v
         fun bindItem(article: Article) {
 
             var titleText: TextView = itemView.findViewById(R.id.title) as TextView
+            var sourceText: TextView = itemView.findViewById(R.id.source_text_view) as TextView
+            var dateText: TextView = itemView.findViewById(R.id.date_text_view) as TextView
             var newsImage = itemView.findViewById(R.id.news_image) as ImageView
 
             titleText.text = article.title
+            sourceText.text = article.source.name
+
+            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+            val date = dateFormat.parse(article.publishedAt)//You will get date object relative to server/client timezone wherever it is parsed
+            val formatter = SimpleDateFormat("dd MMM")
+            //If you need time just put specific format for time like 'HH:mm:ss'
+            val dateStr = formatter.format(date)
+
+            dateText.text = dateStr
 
             Picasso.get().load(article.urlToImage).into(newsImage)
         }
