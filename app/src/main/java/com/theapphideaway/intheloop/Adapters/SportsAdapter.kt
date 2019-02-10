@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
 import com.squareup.picasso.Picasso
 import com.theapphideaway.intheloop.ArticleActivity
 import com.theapphideaway.intheloop.Models.Article
@@ -23,6 +25,10 @@ class SportsAdapter (private val headlineResponse: HeadlineResponse, private val
 
         var noteCard = LayoutInflater.from(context).inflate(R.layout.list_item, viewGroup, false)
 
+        val mAdView = noteCard.findViewById(R.id.ad_view) as AdView
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         return ViewHolder(noteCard)
     }
 
@@ -31,7 +37,7 @@ class SportsAdapter (private val headlineResponse: HeadlineResponse, private val
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindNote(headlineResponse.articles[position])
+        holder.bindNote(headlineResponse.articles[position], position)
 
         holder.itemView.setOnClickListener { goToArticle(headlineResponse.articles[position].url) }
     }
@@ -43,24 +49,41 @@ class SportsAdapter (private val headlineResponse: HeadlineResponse, private val
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bindNote(article: Article) {
+        fun bindNote(article: Article, position: Int) {
             var titleText: TextView = itemView.findViewById(R.id.title) as TextView
             var sourceText: TextView = itemView.findViewById(R.id.source_text_view) as TextView
             var dateText: TextView = itemView.findViewById(R.id.date_text_view) as TextView
             var newsImage = itemView.findViewById(R.id.news_image) as ImageView
+            var adView = itemView.findViewById(R.id.ad_view) as AdView
 
-            titleText.text = article.title
-            sourceText.text = article.source.name
+            if (position % 5 != 0) {
 
-            val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
-            val date = dateFormat.parse(article.publishedAt)//You will get date object relative to server/client timezone wherever it is parsed
-            val formatter = SimpleDateFormat("DD, MMM")
-            //If you need time just put specific format for time like 'HH:mm:ss'
-            val dateStr = formatter.format(date)
+                titleText.visibility = View.VISIBLE
+                sourceText.visibility = View.VISIBLE
+                dateText.visibility = View.VISIBLE
+                newsImage.visibility = View.VISIBLE
+                adView.visibility = View.GONE
 
-            dateText.text = dateStr
+                titleText.text = article.title
+                sourceText.text = article.source.name
 
-            Picasso.get().load(article.urlToImage).into(newsImage)
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'")
+                val date =
+                    dateFormat.parse(article.publishedAt)//You will get date object relative to server/client timezone wherever it is parsed
+                val formatter = SimpleDateFormat("dd MMM")
+                //If you need time just put specific format for time like 'HH:mm:ss'
+                val dateStr = formatter.format(date)
+
+                dateText.text = dateStr
+
+                Picasso.get().load(article.urlToImage).into(newsImage)
+            }else{
+                titleText.visibility = View.GONE
+                sourceText.visibility = View.GONE
+                dateText.visibility = View.GONE
+                newsImage.visibility = View.GONE
+                adView.visibility = View.VISIBLE
+            }
         }
 
     }

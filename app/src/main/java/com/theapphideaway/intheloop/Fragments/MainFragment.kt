@@ -107,7 +107,7 @@ class MainFragment : Fragment() {
             return when (position) {
                 0 -> "Featured"
                 1 -> "Business"
-                2 -> "Tech"
+                2 -> "Technology"
                 3 -> "Entertainment"
                 4 -> "Sports"
                 5 -> "Science"

@@ -16,20 +16,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SciencePage.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SciencePage.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class SciencePage : Fragment() {
     val headlineService = HeadlineService()
     private var scienceAdapter: ScienceAdapter? = null
@@ -46,7 +33,7 @@ class SciencePage : Fragment() {
                 "us",
                 "science",
                 100,
-                "5b4577ccf70249d3822d400479cd2f44"
+                "replace with your own"
             ).await()
 
             layoutManager = LinearLayoutManager(rootView.context)

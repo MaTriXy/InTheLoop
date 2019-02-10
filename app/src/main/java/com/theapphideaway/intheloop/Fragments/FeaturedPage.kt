@@ -16,20 +16,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [FeaturedPage.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [FeaturedPage.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class FeaturedPage : Fragment() {
 
     val headlineService = HeadlineService()
@@ -47,7 +33,7 @@ class FeaturedPage : Fragment() {
                 "us",
                 "general",
                 100,
-                "5b4577ccf70249d3822d400479cd2f44"
+                "replace with your own"
             ).await()
 //            rootView.text_view_test.text = headline.articles[0].title
 

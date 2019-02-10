@@ -41,7 +41,7 @@ class ExploreFragment : Fragment() {
                     var headline = headlineService.getHeadlineApi().getSearchedHeadlines(
                         rootView.url_search_edit_text.text.toString(),
                         100,
-                        "5b4577ccf70249d3822d400479cd2f44"
+                        "replace with your own"
                     ).await()
 
                     switchToResults(headline, rootView.url_search_edit_text.text.toString())

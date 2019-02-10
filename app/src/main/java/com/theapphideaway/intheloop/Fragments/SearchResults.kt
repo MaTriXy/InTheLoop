@@ -27,20 +27,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SearchResults.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SearchResults.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class SearchResults : Fragment() {
 
     val headlineService = HeadlineService()
@@ -89,7 +76,7 @@ class SearchResults : Fragment() {
                     var headline = headlineService.getHeadlineApi().getSearchedHeadlines(
                         rootView.toolbar_url_search_edit_text.text.toString(),
                         100,
-                        "5b4577ccf70249d3822d400479cd2f44"
+                        "replace with your own"
                     ).await()
 
                     if(headline.totalResults > 0) {

@@ -33,7 +33,7 @@ class TechPage : Fragment() {
                 "us",
                 "technology",
                 100,
-                "5b4577ccf70249d3822d400479cd2f44"
+                "replace with your own"
             ).await()
 
             layoutManager = LinearLayoutManager(rootView.context)
