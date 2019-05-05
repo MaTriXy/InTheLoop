@@ -1,21 +1,16 @@
 package com.theapphideaway.intheloop.Fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.FeaturedAdapter
 import com.theapphideaway.intheloop.Models.HeadlineResponse
 
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
 import kotlinx.android.synthetic.main.fragment_explore.view.*
-import kotlinx.android.synthetic.main.fragment_featured_page.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -41,7 +36,7 @@ class ExploreFragment : Fragment() {
                     var headline = headlineService.getHeadlineApi().getSearchedHeadlines(
                         rootView.url_search_edit_text.text.toString(),
                         100,
-                        "replace with your own"
+                        "3032d7f983094e72b4c01be17235b206"
                     ).await()
 
                     switchToResults(headline, rootView.url_search_edit_text.text.toString())

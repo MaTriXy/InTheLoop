@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.SportsAdapter
+import com.theapphideaway.intheloop.Adapters.BaseAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
 import kotlinx.android.synthetic.main.fragment_sports_page.view.*
@@ -16,23 +16,10 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [SportsPage.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [SportsPage.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class SportsPage : Fragment() {
     val headlineService = HeadlineService()
-    private var sportsAdapter: SportsAdapter? = null
+    private var baseAdapter: BaseAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
@@ -46,13 +33,13 @@ class SportsPage : Fragment() {
                 "us",
                 "sports",
                 100,
-                "replace with your own"
+                "3032d7f983094e72b4c01be17235b206"
             ).await()
 
             layoutManager = LinearLayoutManager(rootView.context)
-            sportsAdapter = SportsAdapter(headline, rootView.context)
+            baseAdapter = BaseAdapter(headline, rootView.context)
 
-            rootView.sports_recycler_view.adapter = sportsAdapter
+            rootView.sports_recycler_view.adapter = baseAdapter
             rootView.sports_recycler_view.layoutManager = layoutManager
         }
         return rootView

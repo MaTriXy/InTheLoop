@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.BusinessAdapter
+import com.theapphideaway.intheloop.Adapters.BaseAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
 import kotlinx.android.synthetic.main.fragment_business_page.view.*
@@ -17,7 +17,7 @@ import kotlinx.coroutines.launch
 
 class BusinessPage : Fragment() {
     val headlineService = HeadlineService()
-    private var businessAdapter: BusinessAdapter? = null
+    private var baseAdapter: BaseAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
@@ -31,13 +31,13 @@ class BusinessPage : Fragment() {
                 "us",
                 "business",
                 100,
-                "replace with your own"
+                "3032d7f983094e72b4c01be17235b206"
             ).await()
 
             layoutManager = LinearLayoutManager(rootView.context)
-            businessAdapter = BusinessAdapter(headline, rootView.context)
+            baseAdapter = BaseAdapter(headline, rootView.context)
 
-            rootView.business_recycler_view.adapter = businessAdapter
+            rootView.business_recycler_view.adapter = baseAdapter
             rootView.business_recycler_view.layoutManager = layoutManager
         }
 

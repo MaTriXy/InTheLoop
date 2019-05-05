@@ -13,12 +13,6 @@ import android.webkit.WebChromeClient
 import android.widget.ProgressBar
 
 
-
-
-
-
-
-
 class ArticleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {

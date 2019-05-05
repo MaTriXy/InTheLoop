@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.FeaturedAdapter
+import com.theapphideaway.intheloop.Adapters.BaseAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
 import kotlinx.android.synthetic.main.fragment_featured_page.view.*
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class FeaturedPage : Fragment() {
 
     val headlineService = HeadlineService()
-    private var featuredAdapter: FeaturedAdapter? = null
+    private var baseAdapter: BaseAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
@@ -33,14 +33,13 @@ class FeaturedPage : Fragment() {
                 "us",
                 "general",
                 100,
-                "replace with your own"
+                "3032d7f983094e72b4c01be17235b206"
             ).await()
-//            rootView.text_view_test.text = headline.articles[0].title
 
             layoutManager = LinearLayoutManager(rootView.context)
-            featuredAdapter = FeaturedAdapter(headline, rootView.context)
+            baseAdapter = BaseAdapter(headline, rootView.context)
 
-            rootView.featured_recycler_view.adapter = featuredAdapter
+            rootView.featured_recycler_view.adapter = baseAdapter
             rootView.featured_recycler_view.layoutManager = layoutManager
         }
 

@@ -16,25 +16,9 @@ import com.theapphideaway.intheloop.R
 import kotlinx.android.synthetic.main.fragment_main.*
 import kotlinx.android.synthetic.main.fragment_main.view.*
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Activities that contain this fragment must implement the
- * [MainFragment.OnFragmentInteractionListener] interface
- * to handle interaction events.
- * Use the [MainFragment.newInstance] factory method to
- * create an instance of this fragment.
- *
- */
 class MainFragment : Fragment() {
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
     override fun onCreateView(
@@ -42,7 +26,6 @@ class MainFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         super.onCreate(savedInstanceState)
-        // Inflate the layout for this fragment
 
         val rootView = inflater.inflate(R.layout.fragment_main, container, false)
 
@@ -51,17 +34,11 @@ class MainFragment : Fragment() {
         val viewPager =rootView.findViewById<ViewPager>(R.id.view_pager)
 
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
-            override fun onTabSelected(tab: TabLayout.Tab) {
+            override fun onTabSelected(tab: TabLayout.Tab) {}
 
-            }
+            override fun onTabUnselected(tab: TabLayout.Tab) {}
 
-            override fun onTabUnselected(tab: TabLayout.Tab) {
-
-            }
-
-            override fun onTabReselected(tab: TabLayout.Tab) {
-
-            }
+            override fun onTabReselected(tab: TabLayout.Tab) {}
         })
 
         tabLayout.setupWithViewPager(viewPager)
@@ -77,8 +54,6 @@ class MainFragment : Fragment() {
         return rootView
     }
 
-
-
     class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): Fragment {
@@ -90,8 +65,6 @@ class MainFragment : Fragment() {
                 4 -> SportsPage()
                 5 -> SciencePage()
 
-
-
                 else -> {
                     return HealthPage()
                 }
@@ -99,7 +72,6 @@ class MainFragment : Fragment() {
         }
 
         override fun getCount(): Int {
-            // Show 2 total pages.
             return 7
         }
 

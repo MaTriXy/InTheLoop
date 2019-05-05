@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.TechAdapter
+import com.theapphideaway.intheloop.Adapters.BaseAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
 import kotlinx.android.synthetic.main.fragment_tech_page.view.*
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 
 class TechPage : Fragment() {
     val headlineService = HeadlineService()
-    private var techAdapter: TechAdapter? = null
+    private var baseAdapter: BaseAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
@@ -33,13 +33,13 @@ class TechPage : Fragment() {
                 "us",
                 "technology",
                 100,
-                "replace with your own"
+                "3032d7f983094e72b4c01be17235b206"
             ).await()
 
             layoutManager = LinearLayoutManager(rootView.context)
-            techAdapter = TechAdapter(headline, rootView.context)
+            baseAdapter = BaseAdapter(headline, rootView.context)
 
-            rootView.tech_recycler_view .adapter = techAdapter
+            rootView.tech_recycler_view .adapter = baseAdapter
             rootView.tech_recycler_view.layoutManager = layoutManager
         }
         return rootView

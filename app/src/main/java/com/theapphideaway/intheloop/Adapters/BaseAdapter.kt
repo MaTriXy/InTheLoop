@@ -20,8 +20,8 @@ import com.theapphideaway.intheloop.R
 import java.text.SimpleDateFormat
 
 
-class BusinessAdapter (private val headlineResponse: HeadlineResponse, private val context: Context):
-    RecyclerView.Adapter<BusinessAdapter.ViewHolder>() {
+class BaseAdapter (private val headlineResponse: HeadlineResponse, private val context: Context):
+    RecyclerView.Adapter<BaseAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
 

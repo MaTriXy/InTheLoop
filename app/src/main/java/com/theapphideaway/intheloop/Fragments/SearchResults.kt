@@ -1,7 +1,5 @@
 package com.theapphideaway.intheloop.Fragments
 
-import android.content.Context
-import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
@@ -11,16 +9,11 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.FeaturedAdapter
-import com.theapphideaway.intheloop.Adapters.ScienceAdapter
-import com.theapphideaway.intheloop.Adapters.SearchResultsAdapter
+import com.theapphideaway.intheloop.Adapters.BaseAdapter
 import com.theapphideaway.intheloop.Models.HeadlineResponse
 
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
-import kotlinx.android.synthetic.main.fragment_explore.view.*
-import kotlinx.android.synthetic.main.fragment_science_page.view.*
-import kotlinx.android.synthetic.main.fragment_search_results.*
 import kotlinx.android.synthetic.main.fragment_search_results.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -31,7 +24,7 @@ import kotlinx.coroutines.launch
 class SearchResults : Fragment() {
 
     val headlineService = HeadlineService()
-    private var resultsAdapter: SearchResultsAdapter? = null
+    private var baseAdapter: BaseAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
 
@@ -52,9 +45,9 @@ class SearchResults : Fragment() {
             val headlineResponse = bundle!!.getSerializable("results") as HeadlineResponse
         if(headlineResponse.totalResults > 0) {
             layoutManager = LinearLayoutManager(rootView.context)
-            resultsAdapter = SearchResultsAdapter(headlineResponse, rootView.context)
+            baseAdapter = BaseAdapter(headlineResponse, rootView.context)
 
-            rootView.results_recycler_view.adapter = resultsAdapter
+            rootView.results_recycler_view.adapter = baseAdapter
             rootView.results_recycler_view.layoutManager = layoutManager
         }else {
             rootView.empty_image.visibility = View.VISIBLE
@@ -76,7 +69,7 @@ class SearchResults : Fragment() {
                     var headline = headlineService.getHeadlineApi().getSearchedHeadlines(
                         rootView.toolbar_url_search_edit_text.text.toString(),
                         100,
-                        "replace with your own"
+                        "3032d7f983094e72b4c01be17235b206"
                     ).await()
 
                     if(headline.totalResults > 0) {
@@ -85,9 +78,9 @@ class SearchResults : Fragment() {
                         rootView.no_results_text_view.visibility = View.GONE
 
                         layoutManager = LinearLayoutManager(rootView.context)
-                        resultsAdapter = SearchResultsAdapter(headline, rootView.context)
+                        baseAdapter = BaseAdapter(headline, rootView.context)
 
-                        rootView.results_recycler_view.adapter = resultsAdapter
+                        rootView.results_recycler_view.adapter = baseAdapter
                         rootView.results_recycler_view.layoutManager = layoutManager
                     }
                     else{

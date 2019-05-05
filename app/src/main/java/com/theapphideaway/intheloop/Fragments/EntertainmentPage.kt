@@ -7,7 +7,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.theapphideaway.intheloop.Adapters.EntertainmentAdapter
+import com.theapphideaway.intheloop.Adapters.BaseAdapter
 import com.theapphideaway.intheloop.R
 import com.theapphideaway.intheloop.Services.HeadlineService
 import kotlinx.android.synthetic.main.fragment_entertainment_page.view.*
@@ -19,7 +19,7 @@ import kotlinx.coroutines.launch
 class EntertainmentPage : Fragment() {
 
     val headlineService = HeadlineService()
-    private var entertainmentAdapter: EntertainmentAdapter? = null
+    private var baseAdapter: BaseAdapter? = null
     private var layoutManager: RecyclerView.LayoutManager? = null
 
     override fun onCreateView(
@@ -33,13 +33,13 @@ class EntertainmentPage : Fragment() {
                 "us",
                 "entertainment",
                 100,
-                "replace with your own"
+                "3032d7f983094e72b4c01be17235b206"
             ).await()
 
             layoutManager = LinearLayoutManager(rootView.context)
-            entertainmentAdapter = EntertainmentAdapter(headline, rootView.context)
+            baseAdapter = BaseAdapter(headline, rootView.context)
 
-            rootView.entertainment_recycler_view.adapter = entertainmentAdapter
+            rootView.entertainment_recycler_view.adapter = baseAdapter
             rootView.entertainment_recycler_view.layoutManager = layoutManager
         }
         return rootView
