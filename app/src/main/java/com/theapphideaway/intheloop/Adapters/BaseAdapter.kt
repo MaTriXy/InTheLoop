@@ -3,6 +3,7 @@ package com.theapphideaway.intheloop.Adapters
 import android.content.Context
 import android.content.Intent
 import android.support.v4.content.ContextCompat
+import android.support.v7.widget.CardView
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
@@ -18,8 +19,9 @@ import com.theapphideaway.intheloop.Models.HeadlineResponse
 import com.theapphideaway.intheloop.R
 import java.text.SimpleDateFormat
 
-class EntertainmentAdapter  (private val headlineResponse: HeadlineResponse, private val context: Context):
-    RecyclerView.Adapter<EntertainmentAdapter.ViewHolder>() {
+
+class BusinessAdapter (private val headlineResponse: HeadlineResponse, private val context: Context):
+    RecyclerView.Adapter<BusinessAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, position: Int): ViewHolder {
 
@@ -36,16 +38,16 @@ class EntertainmentAdapter  (private val headlineResponse: HeadlineResponse, pri
         return headlineResponse.articles.count()
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindNote(headlineResponse.articles[position], position)
-
-        holder.itemView.setOnClickListener { goToArticle(headlineResponse.articles[position].url) }
-    }
-
     fun goToArticle(url: String){
         var intent = Intent(context, ArticleActivity::class.java)
         intent.putExtra("Url", url)
         ContextCompat.startActivity(context, intent, null)
+    }
+
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bindNote(headlineResponse.articles[position], position)
+
+        holder.itemView.setOnClickListener { goToArticle(headlineResponse.articles[position].url) }
     }
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -55,6 +57,7 @@ class EntertainmentAdapter  (private val headlineResponse: HeadlineResponse, pri
             var dateText: TextView = itemView.findViewById(R.id.date_text_view) as TextView
             var newsImage = itemView.findViewById(R.id.news_image) as ImageView
             var adView = itemView.findViewById(R.id.ad_view) as AdView
+            var cardView = itemView.findViewById(R.id.card_view) as CardView
 
             if (position % 5 != 0) {
 
@@ -83,6 +86,7 @@ class EntertainmentAdapter  (private val headlineResponse: HeadlineResponse, pri
                 dateText.visibility = View.GONE
                 newsImage.visibility = View.GONE
                 adView.visibility = View.VISIBLE
+                cardView.minimumHeight = 50
             }
         }
 
