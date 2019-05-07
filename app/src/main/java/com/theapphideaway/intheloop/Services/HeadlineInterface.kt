@@ -2,6 +2,7 @@ package com.theapphideaway.intheloop.Services
 
 import com.theapphideaway.intheloop.Models.HeadlineResponse
 import kotlinx.coroutines.Deferred
+import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
 
@@ -13,14 +14,14 @@ interface HeadlineInterface {
         @Query("category") category: String,
         @Query("pageSize") pageSize: Int,
         @Query("apiKey") apiKey: String
-    ): Deferred<HeadlineResponse>
+    ): Deferred<Response<HeadlineResponse>>
 
     @GET("everything")
     fun getSearchedHeadlines(
         @Query("q") query: String,
         @Query("pageSize") pageSize: Int,
         @Query("apiKey") apiKey: String
-    ): Deferred<HeadlineResponse>
+    ): Deferred<Response<HeadlineResponse>>
 
 
 }

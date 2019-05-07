@@ -6,6 +6,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.theapphideaway.intheloop.Models.HeadlineResponse
 
 import com.theapphideaway.intheloop.R
@@ -28,7 +29,6 @@ class ExploreFragment : Fragment() {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_explore, container, false)
 
-
         rootView.url_search_edit_text.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
 
@@ -39,11 +39,8 @@ class ExploreFragment : Fragment() {
                         "3032d7f983094e72b4c01be17235b206"
                     ).await()
 
-                    switchToResults(headline, rootView.url_search_edit_text.text.toString())
+                    switchToResults(headline.body()!!, rootView.url_search_edit_text.text.toString())
                 }
-
-
-
             }
             false
         })

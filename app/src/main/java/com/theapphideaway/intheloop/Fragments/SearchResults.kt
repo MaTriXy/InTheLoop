@@ -9,6 +9,7 @@ import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import com.theapphideaway.intheloop.Adapters.BaseAdapter
 import com.theapphideaway.intheloop.Models.HeadlineResponse
 
@@ -35,6 +36,8 @@ class SearchResults : Fragment() {
         // Inflate the layout for this fragment
         val rootView = inflater.inflate(R.layout.fragment_search_results, container, false)
 
+        val progressbar = rootView.findViewById<ProgressBar>(R.id.progress_bar)
+
         var mToolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
         mToolbar.title = getString(R.string.app_name)
         mToolbar.setNavigationIcon(R.drawable.ic_arrow_back_black_24dp)
@@ -49,12 +52,14 @@ class SearchResults : Fragment() {
 
             rootView.results_recycler_view.adapter = baseAdapter
             rootView.results_recycler_view.layoutManager = layoutManager
+            progressbar.visibility = View.GONE
         }else {
             rootView.empty_image.visibility = View.VISIBLE
             rootView.no_results_text_view.visibility = View.VISIBLE
+            progressbar.visibility = View.GONE
         }
 
-        var text = bundle!!.getString("SearchText")
+        var text = bundle.getString("SearchText")
 
         rootView.toolbar_url_search_edit_text.setText(text)
 
@@ -64,7 +69,6 @@ class SearchResults : Fragment() {
 
         rootView.toolbar_url_search_edit_text.setOnKeyListener { v, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-
                 GlobalScope.launch(Dispatchers.Main) {
                     var headline = headlineService.getHeadlineApi().getSearchedHeadlines(
                         rootView.toolbar_url_search_edit_text.text.toString(),
@@ -72,16 +76,18 @@ class SearchResults : Fragment() {
                         "3032d7f983094e72b4c01be17235b206"
                     ).await()
 
-                    if(headline.totalResults > 0) {
+
+                    if(headline.body()!!.totalResults > 0) {
 
                         rootView.empty_image.visibility = View.GONE
                         rootView.no_results_text_view.visibility = View.GONE
 
                         layoutManager = LinearLayoutManager(rootView.context)
-                        baseAdapter = BaseAdapter(headline, rootView.context)
+                        baseAdapter = BaseAdapter(headline.body()!!, rootView.context)
 
                         rootView.results_recycler_view.adapter = baseAdapter
                         rootView.results_recycler_view.layoutManager = layoutManager
+                        progressbar.visibility = View.GONE
                     }
                     else{
                         rootView.results_recycler_view.adapter = null
@@ -89,6 +95,7 @@ class SearchResults : Fragment() {
 
                         rootView.empty_image.visibility = View.VISIBLE
                         rootView.no_results_text_view.visibility = View.VISIBLE
+                        progressbar.visibility = View.GONE
                     }
 
                 }
